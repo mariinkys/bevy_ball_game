@@ -46,5 +46,6 @@ pub fn handle_game_over(mut cmd: Commands, mut game_over_event_reader: EventRead
     for event in game_over_event_reader.iter() {
         println!("Your final score is: {}", event.score);
         cmd.insert_resource(NextState(Some(AppState::GameOver)));
+        cmd.insert_resource(NextState(Some(SimulationState::Paused)));
     }
 }
