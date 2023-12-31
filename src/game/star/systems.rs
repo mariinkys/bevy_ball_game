@@ -1,9 +1,9 @@
 use bevy::{prelude::*, window::PrimaryWindow};
 use rand::prelude::*;
 
-use crate::star::components::*;
-use crate::star::resources::*;
-use crate::star::NUMBER_OF_STARS;
+use crate::game::star::components::*;
+use crate::game::star::resources::*;
+use crate::game::star::NUMBER_OF_STARS;
 
 pub fn spawn_stars(
     mut cmd: Commands,
@@ -24,6 +24,12 @@ pub fn spawn_stars(
             },
             Star {},
         ));
+    }
+}
+
+pub fn despawn_stars(mut cmd: Commands, stars_query: Query<Entity, With<Star>>) {
+    for star_entity in stars_query.iter() {
+        cmd.entity(star_entity).despawn();
     }
 }
 
