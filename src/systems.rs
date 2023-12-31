@@ -1,4 +1,4 @@
-use crate::{events::*, game::SimulationState, AppState};
+use crate::{events::*, AppState};
 use bevy::{app::AppExit, prelude::*, window::PrimaryWindow};
 
 pub fn spawn_camera(mut cmd: Commands, window_query: Query<&Window, With<PrimaryWindow>>) {
@@ -11,24 +11,23 @@ pub fn spawn_camera(mut cmd: Commands, window_query: Query<&Window, With<Primary
 }
 
 pub fn transition_to_game_state(
-    mut cmd: Commands,
     keyboard_input: Res<Input<KeyCode>>,
     app_state: Res<State<AppState>>,
+    mut next_app_state: ResMut<NextState<AppState>>,
 ) {
     if keyboard_input.just_pressed(KeyCode::G) && app_state.0 != AppState::Game {
-        cmd.insert_resource(NextState(Some(AppState::Game)));
+        next_app_state.set(AppState::Game);
         println!("Entered Game AppState")
     }
 }
 
 pub fn transition_to_main_menu_state(
-    mut cmd: Commands,
     keyboard_input: Res<Input<KeyCode>>,
     app_state: Res<State<AppState>>,
+    mut next_app_state: ResMut<NextState<AppState>>,
 ) {
     if keyboard_input.just_pressed(KeyCode::M) && app_state.0 != AppState::MainMenu {
-        cmd.insert_resource(NextState(Some(AppState::MainMenu)));
-        cmd.insert_resource(NextState(Some(SimulationState::Paused)));
+        next_app_state.set(AppState::MainMenu);
         println!("Entered Main Menu AppState")
     }
 }
@@ -46,6 +45,5 @@ pub fn handle_game_over(mut cmd: Commands, mut game_over_event_reader: EventRead
     for event in game_over_event_reader.iter() {
         println!("Your final score is: {}", event.score);
         cmd.insert_resource(NextState(Some(AppState::GameOver)));
-        cmd.insert_resource(NextState(Some(SimulationState::Paused)));
     }
 }
