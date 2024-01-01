@@ -5,7 +5,8 @@ This repository contains a game made following [this awesome tutorial made by Ja
 Thanks also to Kenney for the awesome [free assets](https://www.kenney.nl/).
 
 ## Game
-
-![Game Demo Gif](https://github.com/mariinkys/bevy_ball_game/blob/main/resources/demo.gif)
+<p align="center">
+  <img src="https://github.com/mariinkys/bevy_ball_game/blob/main/resources/demo.gif" alt="Game Demo Gif">
+</p>
 
 Making this project has been an awesome first GameDev experience, can't wait to do more things with [Bevy](https://bevyengine.org/).
