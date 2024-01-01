@@ -9,7 +9,7 @@ use crate::main_menu::{
 };
 
 pub fn spawn_main_menu(mut cmd: Commands, asset_server: Res<AssetServer>) {
-    let _main_menu_entity = build_main_menu(&mut cmd, &asset_server);
+    build_main_menu(&mut cmd, &asset_server);
 }
 
 pub fn despawn_main_menu(mut cmd: Commands, main_menu_query: Query<Entity, With<MainMenu>>) {
