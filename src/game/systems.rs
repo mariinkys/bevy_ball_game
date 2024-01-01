@@ -16,11 +16,11 @@ pub fn toogle_simulation(
     simulation_state: Res<State<SimulationState>>,
 ) {
     if keyboard_input.just_pressed(KeyCode::Space) {
-        if simulation_state.0 == SimulationState::Running {
+        if simulation_state.get() == &SimulationState::Running {
             cmd.insert_resource(NextState(Some(SimulationState::Paused)));
             println!("Paused Simulation");
         }
-        if simulation_state.0 == SimulationState::Paused {
+        if simulation_state.get() == &SimulationState::Paused {
             cmd.insert_resource(NextState(Some(SimulationState::Running)));
             println!("Running Simulation");
         }

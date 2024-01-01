@@ -15,7 +15,7 @@ pub fn transition_to_game_state(
     app_state: Res<State<AppState>>,
     mut next_app_state: ResMut<NextState<AppState>>,
 ) {
-    if keyboard_input.just_pressed(KeyCode::G) && app_state.0 != AppState::Game {
+    if keyboard_input.just_pressed(KeyCode::G) && app_state.get() != &AppState::Game {
         next_app_state.set(AppState::Game);
         println!("Entered Game AppState")
     }
@@ -26,7 +26,7 @@ pub fn transition_to_main_menu_state(
     app_state: Res<State<AppState>>,
     mut next_app_state: ResMut<NextState<AppState>>,
 ) {
-    if keyboard_input.just_pressed(KeyCode::M) && app_state.0 != AppState::MainMenu {
+    if keyboard_input.just_pressed(KeyCode::M) && app_state.get() != &AppState::MainMenu {
         next_app_state.set(AppState::MainMenu);
         println!("Entered Main Menu AppState")
     }
@@ -42,7 +42,7 @@ pub fn exit_game(
 }
 
 pub fn handle_game_over(mut cmd: Commands, mut game_over_event_reader: EventReader<GameOver>) {
-    for event in game_over_event_reader.iter() {
+    for event in game_over_event_reader.read() {
         println!("Your final score is: {}", event.score);
         cmd.insert_resource(NextState(Some(AppState::GameOver)));
     }

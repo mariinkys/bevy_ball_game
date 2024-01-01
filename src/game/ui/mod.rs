@@ -14,8 +14,8 @@ impl Plugin for GameUIPlugin {
     fn build(&self, app: &mut App) {
         app
             // Plugins
-            .add_plugin(HudPlugin)
-            .add_plugin(PauseMenuPlugin)
-            .add_plugin(GameOverMenuPlugin);
+            .add_plugins(HudPlugin)
+            .add_plugins(PauseMenuPlugin)
+            .add_plugins(GameOverMenuPlugin);
     }
 }

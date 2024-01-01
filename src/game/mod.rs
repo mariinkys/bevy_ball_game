@@ -25,17 +25,17 @@ impl Plugin for GamePlugin {
             //Events
             .add_event::<GameOver>()
             //On Enter State
-            .add_system(pause_simulation.in_schedule(OnEnter(AppState::Game)))
+            .add_systems(OnEnter(AppState::Game), pause_simulation)
             //Plugins
-            .add_plugin(PlayerPlugin)
-            .add_plugin(EnemyPlugin)
-            .add_plugin(ScorePlugin)
-            .add_plugin(StarPlugin)
-            .add_plugin(GameUIPlugin)
+            .add_plugins(PlayerPlugin)
+            .add_plugins(EnemyPlugin)
+            .add_plugins(ScorePlugin)
+            .add_plugins(StarPlugin)
+            .add_plugins(GameUIPlugin)
             //Systems
-            .add_system(toogle_simulation.run_if(in_state(AppState::Game)))
+            .add_systems(Update, toogle_simulation.run_if(in_state(AppState::Game)))
             // On Exit State
-            .add_system(resume_simulation.in_schedule(OnExit(AppState::Game)));
+            .add_systems(OnExit(AppState::Game), resume_simulation);
     }
 }
 

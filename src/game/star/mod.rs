@@ -18,14 +18,15 @@ impl Plugin for StarPlugin {
     fn build(&self, app: &mut App) {
         app.init_resource::<StarSpawnTimer>()
             //On Enter State
-            .add_system(spawn_stars.in_schedule(OnEnter(AppState::Game))) // Run when we enter game state
+            .add_systems(OnEnter(AppState::Game), spawn_stars) // Run when we enter game state
             //Systems
             .add_systems(
+                Update,
                 (tick_star_spawn_timer, spawn_stars_over_time)
-                    .in_set(OnUpdate(AppState::Game)) //Run only if AppState is set to Game
-                    .in_set(OnUpdate(SimulationState::Running)), //Run only if SimulationState is set to Running
+                    .run_if(in_state(AppState::Game))
+                    .run_if(in_state(SimulationState::Running)),
             )
             //Exit State Systems
-            .add_system(despawn_stars.in_schedule(OnExit(AppState::Game))); // Run when we exit game state
+            .add_systems(OnExit(AppState::Game), despawn_stars); // Run when we exit game state
     }
 }

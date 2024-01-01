@@ -97,7 +97,6 @@ pub fn enemy_hit_player(
     mut player_query: Query<(Entity, &Transform), With<Player>>,
     enemy_query: Query<&Transform, With<Enemy>>,
     asset_server: Res<AssetServer>,
-    audio: Res<Audio>,
     score: Res<Score>,
 ) {
     if let Ok((player_entity, player_transform)) = player_query.get_single_mut() {
@@ -110,7 +109,10 @@ pub fn enemy_hit_player(
 
             if distance < player_radius + enemy_radius {
                 let sound_effect = asset_server.load("audio/explosionCrunch_000.ogg");
-                audio.play(sound_effect);
+                cmd.spawn(AudioBundle {
+                    source: sound_effect,
+                    settings: PlaybackSettings::ONCE,
+                });
                 cmd.entity(player_entity).despawn();
                 game_over_event_writer.send(GameOver { score: score.value });
             }
@@ -122,7 +124,6 @@ pub fn player_hit_star(
     mut cmd: Commands,
     player_query: Query<&Transform, With<Player>>,
     star_query: Query<(Entity, &Transform), With<Star>>,
-    audio: Res<Audio>,
     asset_server: Res<AssetServer>,
     mut score: ResMut<Score>,
 ) {
@@ -132,7 +133,10 @@ pub fn player_hit_star(
             if distance < PLAYER_SIZE / 2.0 + STAR_SIZE / 2.0 {
                 score.value += 1;
                 let sound_effect = asset_server.load("audio/laserLarge_000.ogg");
-                audio.play(sound_effect);
+                cmd.spawn(AudioBundle {
+                    source: sound_effect,
+                    settings: PlaybackSettings::ONCE,
+                });
                 cmd.entity(star_entity).despawn();
             }
         }
