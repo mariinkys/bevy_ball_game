@@ -13,4 +13,4 @@ Making this project has been an awesome first GameDev experience, can't wait to 
 
 ## Note
 
-After updating to Bevy 0.13 there's a bug where the player texture cannot be seen after the first death, If I have time I'll try to look into it.
+After updating to Bevy 0.13 there's a bug where the player texture cannot be seen before the first death, If I have time I'll try to look into it.
