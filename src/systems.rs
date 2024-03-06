@@ -11,29 +11,29 @@ pub fn spawn_camera(mut cmd: Commands, window_query: Query<&Window, With<Primary
 }
 
 pub fn transition_to_game_state(
-    keyboard_input: Res<Input<KeyCode>>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
     app_state: Res<State<AppState>>,
     mut next_app_state: ResMut<NextState<AppState>>,
 ) {
-    if keyboard_input.just_pressed(KeyCode::G) && app_state.get() != &AppState::Game {
+    if keyboard_input.just_pressed(KeyCode::KeyG) && app_state.get() != &AppState::Game {
         next_app_state.set(AppState::Game);
         println!("Entered Game AppState")
     }
 }
 
 pub fn transition_to_main_menu_state(
-    keyboard_input: Res<Input<KeyCode>>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
     app_state: Res<State<AppState>>,
     mut next_app_state: ResMut<NextState<AppState>>,
 ) {
-    if keyboard_input.just_pressed(KeyCode::M) && app_state.get() != &AppState::MainMenu {
+    if keyboard_input.just_pressed(KeyCode::KeyM) && app_state.get() != &AppState::MainMenu {
         next_app_state.set(AppState::MainMenu);
         println!("Entered Main Menu AppState")
     }
 }
 
 pub fn exit_game(
-    keyboard_input: Res<Input<KeyCode>>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
     mut app_exit_event_writer: EventWriter<AppExit>,
 ) {
     if keyboard_input.just_pressed(KeyCode::Escape) {

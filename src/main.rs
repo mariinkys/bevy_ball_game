@@ -13,7 +13,7 @@ fn main() {
         //Default Plugins
         .add_plugins(DefaultPlugins)
         //Add State
-        .add_state::<AppState>()
+        .init_state::<AppState>()
         //My Plugins
         .add_plugins(GamePlugin)
         .add_plugins(MainMenuPlugin)

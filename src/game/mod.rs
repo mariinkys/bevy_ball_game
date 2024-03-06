@@ -21,7 +21,7 @@ impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
         app
             //State
-            .add_state::<SimulationState>()
+            .init_state::<SimulationState>()
             //Events
             .add_event::<GameOver>()
             //On Enter State

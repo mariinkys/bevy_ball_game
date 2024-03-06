@@ -50,7 +50,7 @@ pub fn build_main_menu(cmd: &mut Commands, asset_server: &Res<AssetServer>) -> E
                                 "Bevy Ball Game",
                                 get_button_text_style(asset_server, 64.0),
                             )],
-                            alignment: TextAlignment::Center,
+                            justify: JustifyText::Center,
                             ..default()
                         },
                         ..default()
@@ -81,7 +81,7 @@ pub fn build_main_menu(cmd: &mut Commands, asset_server: &Res<AssetServer>) -> E
                                 "Play",
                                 get_button_text_style(asset_server, 32.0),
                             )],
-                            alignment: TextAlignment::Center,
+                            justify: JustifyText::Center,
                             ..default()
                         },
                         ..default()
@@ -105,7 +105,7 @@ pub fn build_main_menu(cmd: &mut Commands, asset_server: &Res<AssetServer>) -> E
                                 "Quit",
                                 get_button_text_style(asset_server, 32.0),
                             )],
-                            alignment: TextAlignment::Center,
+                            justify: JustifyText::Center,
                             ..default()
                         },
                         ..default()

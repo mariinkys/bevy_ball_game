@@ -12,7 +12,7 @@ pub fn resume_simulation(mut simulation_state_next_state: ResMut<NextState<Simul
 
 pub fn toogle_simulation(
     mut cmd: Commands,
-    keyboard_input: Res<Input<KeyCode>>,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
     simulation_state: Res<State<SimulationState>>,
 ) {
     if keyboard_input.just_pressed(KeyCode::Space) {
